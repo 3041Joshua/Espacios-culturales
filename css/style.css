@@ -125,3 +125,8 @@ footer{padding:36px 5vw;background:var(--olive-dark);color:#eee;display:flex;ali
 .search-result:hover{background:#fffdf8;border-color:rgba(41,42,37,.13)}
 .search-result strong{display:block;font-family:"Playfair Display",serif;font-size:17px}.search-result span{font-size:13px;color:#6c6b64}.search-empty{padding:16px;color:#6c6b64}
 @media(max-width:700px){.search-icon{display:flex!important}.search-panel{top:78px;padding:14px 5vw 20px}.search-box input{font-size:14px}}
+
+
+/* Vista exclusiva del mapa */
+.view-hidden{display:none !important;}
+#mapa:not(.view-hidden){min-height:calc(100vh - 80px); padding-top:48px;}

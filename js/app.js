@@ -133,10 +133,43 @@ if(backToTop){
   backToTop.addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"}));
 }
 
+
+// Vista exclusiva del mapa
+const heroSection=document.getElementById("inicio");
+const placesSection=document.getElementById("lugares");
+const mapSection=document.getElementById("mapa");
+let culturalMap=null;
+
+function showMainView(){
+  heroSection?.classList.remove("view-hidden");
+  placesSection?.classList.remove("view-hidden");
+  mapSection?.classList.add("view-hidden");
+}
+
+function showMapView(){
+  heroSection?.classList.add("view-hidden");
+  placesSection?.classList.add("view-hidden");
+  mapSection?.classList.remove("view-hidden");
+  document.querySelectorAll(".nav a").forEach(a=>a.classList.toggle("active",a.dataset.view==="mapa"));
+  window.scrollTo({top:0,behavior:"smooth"});
+  setTimeout(()=>culturalMap?.invalidateSize(),120);
+}
+
+document.querySelectorAll(".nav a[data-view='mapa']").forEach(link=>link.addEventListener("click",e=>{
+  e.preventDefault();
+  showMapView();
+}));
+
+document.querySelectorAll(".nav a[href='#inicio'], .footer-brand, .footer-nav a[href='#inicio']").forEach(link=>link.addEventListener("click",()=>{
+  showMainView();
+  document.querySelectorAll(".nav a").forEach(a=>a.classList.toggle("active",a.getAttribute("href")==="#inicio"));
+}));
+
 const mapColors={museo:"#a96e57",galeria:"#647255",centro:"#3f4a34",independiente:"#8a6f4d"};
 const mapEl=document.getElementById("map");
 if(mapEl && typeof L!=="undefined"){
   const map=L.map("map",{scrollWheelZoom:false}).setView([19.36,-98.05],10);
+  culturalMap=map;
   L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{
     attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
     maxZoom:18
