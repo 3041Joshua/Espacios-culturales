@@ -30,10 +30,19 @@
     <a href="#mapa">Mapa</a>
     <a href="#proyecto">Sobre el proyecto</a>
   </nav>
-  <button class="search-icon" aria-label="Buscar">
+  <button class="search-icon" aria-label="Buscar" aria-expanded="false" aria-controls="search-panel">
     <svg viewBox="0 0 24 24" width="19" height="19"><circle cx="10.5" cy="10.5" r="7" stroke="currentColor" stroke-width="1.8" fill="none"/><line x1="20" y1="20" x2="15.5" y2="15.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
   </button>
 </header>
+
+<div class="search-panel" id="search-panel" role="search" hidden>
+  <div class="search-box">
+    <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><circle cx="10.5" cy="10.5" r="7" stroke="currentColor" stroke-width="1.8" fill="none"/><line x1="20" y1="20" x2="15.5" y2="15.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+    <input id="search-input" type="search" placeholder="Busca museos, galerías o espacios culturales..." autocomplete="off" aria-label="Buscar lugares">
+    <button class="search-close" type="button" aria-label="Cerrar búsqueda">×</button>
+  </div>
+  <div class="search-results" id="search-results"></div>
+</div>
 
 <main>
 <section class="hero" id="inicio">

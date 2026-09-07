@@ -68,6 +68,60 @@ document.querySelectorAll("a[data-filter]").forEach(link=>link.addEventListener(
 
 render();
 
+// Buscador de lugares
+const searchButton=document.querySelector(".search-icon");
+const searchPanel=document.getElementById("search-panel");
+const searchInput=document.getElementById("search-input");
+const searchResults=document.getElementById("search-results");
+const searchClose=document.querySelector(".search-close");
+
+function normalizeText(value){
+  return String(value||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();
+}
+function showSearchResults(query=""){
+  const q=normalizeText(query).trim();
+  if(!q){
+    searchResults.innerHTML='<div class="search-empty">Escribe el nombre de un museo, galería o espacio cultural.</div>';
+    return;
+  }
+  const results=places.filter(place=>normalizeText([
+    place.name,place.label,place.type,place.location,place.address,place.description
+  ].join(" ")).includes(q));
+  if(!results.length){
+    searchResults.innerHTML='<div class="search-empty">No encontramos resultados para tu búsqueda.</div>';
+    return;
+  }
+  searchResults.innerHTML=results.map(place=>`<button class="search-result" type="button" data-search-type="${place.type}" data-search-name="${encodeURIComponent(place.name)}"><strong>${place.name}</strong><span>${place.label} · ${place.location}</span></button>`).join("");
+  searchResults.querySelectorAll(".search-result").forEach(btn=>btn.addEventListener("click",()=>{
+    const type=btn.dataset.searchType;
+    const name=decodeURIComponent(btn.dataset.searchName);
+    document.querySelectorAll(".filter").forEach(b=>b.classList.toggle("active",b.dataset.filter===type));
+    render(type);
+    closeSearch();
+    document.getElementById("lugares").scrollIntoView({behavior:"smooth",block:"start"});
+    setTimeout(()=>{
+      [...document.querySelectorAll(".card h3")].find(h=>h.textContent===name)?.closest(".card")?.scrollIntoView({behavior:"smooth",block:"center"});
+    },450);
+  }));
+}
+function openSearch(){
+  searchPanel.hidden=false;
+  searchButton.setAttribute("aria-expanded","true");
+  searchInput.value="";
+  showSearchResults();
+  setTimeout(()=>searchInput.focus(),0);
+}
+function closeSearch(){
+  searchPanel.hidden=true;
+  searchButton.setAttribute("aria-expanded","false");
+}
+if(searchButton && searchPanel){
+  searchButton.addEventListener("click",()=>searchPanel.hidden?openSearch():closeSearch());
+  searchClose.addEventListener("click",closeSearch);
+  searchInput.addEventListener("input",e=>showSearchResults(e.target.value));
+  document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!searchPanel.hidden)closeSearch();});
+}
+
 const menuToggle=document.querySelector(".menu-toggle"),nav=document.getElementById("nav");
 if(menuToggle && nav){
   menuToggle.addEventListener("click",()=>{const open=nav.classList.toggle("open");menuToggle.setAttribute("aria-expanded",open)});
