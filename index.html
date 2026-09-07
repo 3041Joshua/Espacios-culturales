@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Guía para descubrir museos, galerías y centros culturales de Tlaxcala.">
+<title>Cultura Tlaxcala — Descubre la cultura de Tlaxcala</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css?v=6">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+</head>
+<body>
+<header class="site-header">
+  <a class="brand" href="#inicio">
+    <svg class="brand-symbol" viewBox="0 0 40 40" aria-hidden="true">
+      <path d="M20 34 C20 34 20 20 20 12" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+      <path d="M20 12 C10 12 6 20 6 20 C6 20 12 24 20 18 Z" fill="currentColor"/>
+      <path d="M20 18 C28 12 34 16 34 16 C34 16 30 24 20 22 Z" fill="currentColor"/>
+      <path d="M20 22 C13 22 9 28 9 28 C9 28 14 32 20 26 Z" fill="currentColor" opacity=".85"/>
+      <path d="M20 26 C26 28 30 34 30 34 C30 34 24 36 20 30 Z" fill="currentColor" opacity=".85"/>
+    </svg>
+    <span class="brand-text">CULTURA<br>TLAXCALA</span>
+  </a>
+  <button class="menu-toggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
+  <nav class="nav" id="nav">
+    <a class="active" href="#inicio" data-filter="todos">Inicio</a>
+    <a href="#lugares" data-filter="todos">Explora</a>
+    <a href="#mapa">Mapa</a>
+    <a href="#proyecto">Sobre el proyecto</a>
+  </nav>
+  <button class="search-icon" aria-label="Buscar">
+    <svg viewBox="0 0 24 24" width="19" height="19"><circle cx="10.5" cy="10.5" r="7" stroke="currentColor" stroke-width="1.8" fill="none"/><line x1="20" y1="20" x2="15.5" y2="15.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+  </button>
+</header>
+
+<main>
+<section class="hero" id="inicio">
+  <div class="hero-copy">
+    <p class="eyebrow">Espacios que inspiran</p>
+    <h1>Descubre la cultura<br>de Tlaxcala</h1>
+    <p class="hero-text">Museos, galerías y centros culturales que preservan, difunden y dan vida al arte, la historia y la identidad de nuestro estado.</p>
+    <span class="hero-rule"></span>
+  </div>
+  <div class="hero-photo" aria-hidden="true">
+    <img src="assets/hero/Cuatla.jpeg" alt="" onerror="this.onerror=null;this.replaceWith(document.getElementById('hero-fallback').content.cloneNode(true))">
+  </div>
+  <template id="hero-fallback"><svg viewBox="0 0 700 560" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block">
+      <defs>
+        <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#c9d9df"/>
+          <stop offset="1" stop-color="#e7ded0"/>
+        </linearGradient>
+        <linearGradient id="stone" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#e3c9a0"/>
+          <stop offset="1" stop-color="#c8a374"/>
+        </linearGradient>
+      </defs>
+      <rect width="700" height="560" fill="url(#sky)"/>
+      <rect x="60" y="380" width="480" height="180" fill="url(#stone)"/>
+      <rect x="150" y="230" width="120" height="330" fill="url(#stone)"/>
+      <rect x="150" y="230" width="120" height="18" fill="#b28e63"/>
+      <path d="M150 230 L210 150 L270 230 Z" fill="#b98f5e"/>
+      <circle cx="210" cy="150" r="10" fill="#e3c9a0"/>
+      <rect x="200" y="70" width="20" height="80" fill="#8f7350"/>
+      <rect x="195" y="65" width="30" height="8" fill="#8f7350"/>
+      <line x1="210" y1="40" x2="210" y2="90" stroke="#5f4c34" stroke-width="6"/>
+      <line x1="188" y1="58" x2="232" y2="58" stroke="#5f4c34" stroke-width="6"/>
+      <rect x="330" y="190" width="150" height="370" fill="url(#stone)"/>
+      <circle cx="405" cy="230" r="46" fill="none" stroke="#a9835a" stroke-width="10"/>
+      <rect x="360" y="150" width="90" height="60" fill="#b98f5e"/>
+      <ellipse cx="405" cy="150" rx="45" ry="22" fill="#c8a374"/>
+      <ellipse cx="405" cy="132" rx="12" ry="26" fill="#c8a374"/>
+      <rect x="399" y="90" width="12" height="42" fill="#8f7350"/>
+      <line x1="405" y1="60" x2="405" y2="98" stroke="#5f4c34" stroke-width="5"/>
+      <line x1="390" y1="72" x2="420" y2="72" stroke="#5f4c34" stroke-width="5"/>
+      <rect x="190" y="380" width="26" height="60" fill="#7d6142" opacity=".7"/>
+      <rect x="240" y="380" width="26" height="60" fill="#7d6142" opacity=".7"/>
+      <rect x="370" y="420" width="30" height="70" fill="#7d6142" opacity=".7"/>
+      <rect x="430" y="420" width="30" height="70" fill="#7d6142" opacity=".7"/>
+      <g>
+        <ellipse cx="560" cy="120" rx="140" ry="120" fill="#4c5c3c" opacity=".9"/>
+        <ellipse cx="640" cy="220" rx="120" ry="100" fill="#556848" opacity=".9"/>
+        <ellipse cx="500" cy="60" rx="90" ry="70" fill="#3f4e33" opacity=".9"/>
+        <g fill="#d6469c">
+          <path d="M600 90 q18 -22 36 0 q-18 10 -18 26 q0 -16 -18 -26z"/>
+          <path d="M560 60 q16 -20 32 0 q-16 9 -16 24 q0 -15 -16 -24z"/>
+          <path d="M650 150 q16 -20 32 0 q-16 9 -16 24 q0 -15 -16 -24z"/>
+          <path d="M610 170 q14 -18 28 0 q-14 8 -14 22 q0 -14 -14 -22z"/>
+          <path d="M540 110 q14 -18 28 0 q-14 8 -14 22 q0 -14 -14 -22z"/>
+          <path d="M670 90 q14 -18 28 0 q-14 8 -14 22 q0 -14 -14 -22z"/>
+        </g>
+        <g fill="#f199c9">
+          <circle cx="618" cy="98" r="5"/><circle cx="576" cy="70" r="5"/><circle cx="666" cy="158" r="5"/>
+          <circle cx="624" cy="178" r="4"/><circle cx="554" cy="118" r="4"/><circle cx="684" cy="98" r="4"/>
+        </g>
+      </g>
+      <rect x="0" y="540" width="700" height="20" fill="#e7ded0" opacity=".5"/>
+    </svg></template>
+</section>
+
+<section class="places-section" id="lugares">
+  <div class="filters" role="group" aria-label="Filtrar lugares">
+    <button class="filter active" data-filter="todos">Todos</button>
+    <button class="filter" data-filter="museo">Museos</button>
+    <button class="filter" data-filter="galeria">Galerías</button>
+    <button class="filter" data-filter="independiente">Espacios independientes</button>
+    <button class="filter" data-filter="centro">Centros culturales</button>
+  </div>
+
+  <div class="places-grid" id="places-grid"></div>
+</section>
+
+
+
+<section class="map-section" id="mapa">
+  <div class="map-heading">
+    <p class="eyebrow">Ubícalos en el mapa</p>
+    <h2>Recorre Tlaxcala</h2>
+  </div>
+  <div class="map-legend">
+    <span><i class="dot dot-museo"></i> Museos</span>
+    <span><i class="dot dot-galeria"></i> Galerías</span>
+    <span><i class="dot dot-centro"></i> Centros culturales</span>
+    <span><i class="dot dot-independiente"></i> Espacios independientes</span>
+  </div>
+  <div id="map"></div>
+</section>
+</main>
+
+<footer id="proyecto">
+  <div class="footer-top">
+    <a class="footer-brand" href="#inicio">
+      <svg class="brand-symbol" viewBox="0 0 40 40" aria-hidden="true">
+        <path d="M20 34 C20 34 20 20 20 12" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+        <path d="M20 12 C10 12 6 20 6 20 C6 20 12 24 20 18 Z" fill="currentColor"/>
+        <path d="M20 18 C28 12 34 16 34 16 C34 16 30 24 20 22 Z" fill="currentColor"/>
+        <path d="M20 22 C13 22 9 28 9 28 C9 28 14 32 20 26 Z" fill="currentColor" opacity=".85"/>
+        <path d="M20 26 C26 28 30 34 30 34 C30 34 24 36 20 30 Z" fill="currentColor" opacity=".85"/>
+      </svg>
+      <span class="brand-text">CULTURA<br>TLAXCALA</span>
+    </a>
+    <span class="footer-divider"></span>
+    <p class="footer-tagline">El arte también es<br>una forma de habitar el mundo.</p>
+  </div>
+  <nav class="footer-nav">
+    <a href="#inicio">Inicio</a>
+    <a href="#lugares" data-filter="todos">Explora</a>
+    <a href="#proyecto">Sobre el proyecto</a>
+  </nav>
+  <div class="footer-actions">
+  
+  </div>
+</footer>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="js/app.js?v=6"></script>
+</body>
+</html>

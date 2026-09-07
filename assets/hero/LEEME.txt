@@ -1,0 +1,15 @@
+CÓMO PONER TU PROPIA FOTO EN EL INICIO
+========================================
+
+1. Elige tu foto (recomendado: horizontal, mínimo 1200x900px).
+2. Renómbrala exactamente como: hero-photo.jpg
+   (si tu foto es .png o .webp, cambia también la referencia
+    en index.html, línea del <img src="assets/hero/hero-photo.jpg">)
+3. Colócala dentro de esta carpeta: assets/hero/
+   reemplazando o junto al archivo que ya exista con ese nombre.
+4. Abre index.html en el navegador para verla aplicada.
+
+Si no hay ninguna imagen en esta carpeta, el sitio muestra
+automáticamente la ilustración de respaldo (el campanario con
+buganvilias), así que nunca se rompe el diseño mientras decides
+qué foto usar.
